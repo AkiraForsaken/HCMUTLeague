@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #512da8;
+    --color-ivory: #FFFFF0;
+    --color-light-green: #29ce8e;
+    --color-light-100: #cecefb;
+    --color-light-200: #a8b5db;
+    --color-gray-100: #9ca4ab;
+    --color-dark-100: #0f0d23;
+
+    --breakpoint-xs: 480px;
+}
+
+@layer base {
+    * {
+        box-sizing: border-box;
+    }
+
+    button {
+        cursor: pointer;
+    }
+}
+
+@utility flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@utility text-gradient {
+    @apply bg-linear-to-r from-[#552586] to-[#804FB3] bg-clip-text text-transparent;
+}
