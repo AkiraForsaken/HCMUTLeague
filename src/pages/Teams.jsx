@@ -22,7 +22,7 @@ const Teams = () => {
             navigate(`/teams/${team.club}`);
             scrollTo(0,0);
             }}>
-            <img src={team.logo} alt={team.club} className='group-hover:scale-108 transition w-25 max-h-[100px]'/>
+            <img src={team.logo} alt={team.club} className='group-hover:scale-108 transition w-25 max-h-[100px] object-contain'/>
             <div className='flex justify-between'> 
               <p className='text-md font-medium'>{team.club}</p>
               <i className="fa-solid fa-arrow-right"></i>

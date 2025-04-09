@@ -275,13 +275,14 @@ export const teams = [
     }
   ];
 
-export const matches = [
+export const matches = [ // data will be fetched from database - be careful with the date
   {
     matchID: 1,
     homeTeam: 'Man City',
     homeLogo: man_city_logo,
     awayTeam: 'Crystal Palace',
     awayLogo: crystal_palace_logo,
+    date: '2025-04-15', 
     time: '18:30',
     stadium: 'Etihad Stadium, Manchester'
   },
@@ -291,6 +292,7 @@ export const matches = [
     homeLogo: brighton_logo,
     awayTeam: 'Leicester',
     awayLogo: leicester_logo,
+    date: '2025-04-14', 
     time: '21:00',
     stadium: 'American Express Stadium, Falmer'
   },
@@ -300,6 +302,7 @@ export const matches = [
     homeLogo: nottingham_logo,
     awayTeam: 'Everton',
     awayLogo: everton_logo,
+    date: '2025-04-13', 
     time: '21:00',
     stadium: 'The City Ground, Nottingham'
   },
@@ -309,6 +312,7 @@ export const matches = [
     homeLogo: southampton_logo,
     awayTeam: 'Aston Villa',
     awayLogo: astonvilla_logo,
+    date: '2025-04-22', 
     time: '21:00',
     stadium: "St. Mary's Stadium, Southampton"
   },
@@ -318,6 +322,7 @@ export const matches = [
     homeLogo: arsenal_logo,
     awayTeam: 'Brentford',
     awayLogo: brentford_logo,
+    date: '2025-04-23', 
     time: '23:30',
     stadium: 'Emirates Stadium, London'
   }
