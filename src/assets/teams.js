@@ -1,23 +1,7 @@
-import bklogo from './bklogo.png'
-import menu_icon from './menu_icon.svg'
-import profile_pic from './profile_pic.png'
-import manchesterLogo from './manchester.png'
-import soccer_banner from './soccer_banner.png'
-
-export const assets = {
-    bklogo,
-    menu_icon,
-    profile_pic,
-    manchesterLogo,
-    soccer_banner
-}
-
 export const teams = [
     {
       position: 1,
       club: 'Liverpool',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 22,
       drawn: 7,
@@ -32,8 +16,6 @@ export const teams = [
     {
       position: 2,
       club: 'Arsenal',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 17,
       drawn: 11,
@@ -48,8 +30,6 @@ export const teams = [
     {
       position: 3,
       club: 'Nottingham Forest',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 17,
       drawn: 6,
@@ -64,8 +44,6 @@ export const teams = [
     {
       position: 4,
       club: 'Chelsea',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 15,
       drawn: 8,
@@ -80,8 +58,6 @@ export const teams = [
     {
       position: 5,
       club: 'Newcastle United',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 30,
       won: 16,
       drawn: 5,
@@ -96,8 +72,6 @@ export const teams = [
     {
       position: 6,
       club: 'Manchester City',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 15,
       drawn: 7,
@@ -112,8 +86,6 @@ export const teams = [
     {
       position: 7,
       club: 'Aston Villa',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 14,
       drawn: 9,
@@ -128,8 +100,6 @@ export const teams = [
     {
       position: 8,
       club: 'Fulham',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 13,
       drawn: 9,
@@ -144,8 +114,6 @@ export const teams = [
     {
       position: 9,
       club: 'Brighton And Hove Albion',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 12,
       drawn: 11,
@@ -160,8 +128,6 @@ export const teams = [
     {
       position: 10,
       club: 'Bournemouth',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 12,
       drawn: 9,
@@ -176,8 +142,6 @@ export const teams = [
     {
       position: 11,
       club: 'Crystal Palace',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 30,
       won: 11,
       drawn: 10,
@@ -192,8 +156,6 @@ export const teams = [
     {
       position: 12,
       club: 'Brentford',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 12,
       drawn: 6,
@@ -208,8 +170,6 @@ export const teams = [
     {
       position: 13,
       club: 'Manchester United',
-      logo: manchesterLogo,
-      backgroundColor: '#DC5032',
       played: 31,
       won: 10,
       drawn: 8,

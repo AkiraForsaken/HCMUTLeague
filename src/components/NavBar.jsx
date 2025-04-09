@@ -33,9 +33,6 @@ const NavBar = () => {
             </button>
           </NavLink>
         ) : (
-          // <button className="px-8 py-2 bg-indigo-500 hover:bg-primary transition text-white rounded-full" onClick={logout}>
-          //   Logout
-          // </button>
           <div className='relative group'>
             <img src={assets.profile_pic} alt='profile_pic' className='w-10 rounded-lg'/>
             <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40'>
