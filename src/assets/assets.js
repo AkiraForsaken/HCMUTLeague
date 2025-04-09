@@ -1,14 +1,50 @@
 import bklogo from './bklogo.png'
 import menu_icon from './menu_icon.svg'
 import profile_pic from './profile_pic.png'
-import manchesterLogo from './manchester.png'
 import soccer_banner from './soccer_banner.png'
+import man_united_logo from './man_united-removebg-preview.png'
+import arsenal_logo from './arsenal-removebg-preview.png'
+import liverpool_logo from './liverpool-removebg-preview.png'
+import nottingham_logo from './nottingham-removebg-preview.png'
+import chelsea_logo from './chelsea-removebg-preview.png'
+import newcastle_logo from './newcastle-removebg-preview.png'
+import man_city_logo from './manchester_city-removebg-preview.png'
+import astonvilla_logo from './aston_villa-removebg-preview.png'
+import fulham_logo from './fulham-removebg-preview.png'
+import brighton_logo from './Brighton-removebg-preview.png'
+import bournemouth_logo from './bournemouth-removebg-preview.png'
+import crystal_palace_logo from './crystal_palace-removebg-preview.png'
+import brentford_logo from './brentford-fc-removebg-preview.png'
+import everton_logo from './everton-removebg-preview.png'
+import leicester_logo from './leicester_city-removebg-preview.png'
+import southampton_logo from './southampton-removebg-preview.png'
+import tottenham_logo from './tottenham-removebg-preview.png'
+import wesham_logo from './west_ham-removebg-preview.png'
+import wolves_logo from './wolves-removebg-preview.png'
 
 export const assets = {
     bklogo,
     menu_icon,
     profile_pic,
-    manchesterLogo,
+    man_united_logo,
+    arsenal_logo,
+    liverpool_logo,
+    nottingham_logo,
+    chelsea_logo,
+    newcastle_logo,
+    man_city_logo,
+    astonvilla_logo,
+    fulham_logo,
+    brighton_logo,
+    bournemouth_logo,
+    crystal_palace_logo,  
+    brentford_logo,
+    everton_logo,
+    leicester_logo,
+    southampton_logo,
+    tottenham_logo,
+    wesham_logo,
+    wolves_logo,
     soccer_banner
 }
 
@@ -16,7 +52,7 @@ export const teams = [
     {
       position: 1,
       club: 'Liverpool',
-      logo: manchesterLogo,
+      logo: liverpool_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 22,
@@ -32,7 +68,7 @@ export const teams = [
     {
       position: 2,
       club: 'Arsenal',
-      logo: manchesterLogo,
+      logo: arsenal_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 17,
@@ -48,7 +84,7 @@ export const teams = [
     {
       position: 3,
       club: 'Nottingham Forest',
-      logo: manchesterLogo,
+      logo: nottingham_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 17,
@@ -64,7 +100,7 @@ export const teams = [
     {
       position: 4,
       club: 'Chelsea',
-      logo: manchesterLogo,
+      logo: chelsea_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 15,
@@ -80,7 +116,7 @@ export const teams = [
     {
       position: 5,
       club: 'Newcastle United',
-      logo: manchesterLogo,
+      logo: newcastle_logo,
       backgroundColor: '#DC5032',
       played: 30,
       won: 16,
@@ -96,7 +132,7 @@ export const teams = [
     {
       position: 6,
       club: 'Manchester City',
-      logo: manchesterLogo,
+      logo: man_city_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 15,
@@ -112,7 +148,7 @@ export const teams = [
     {
       position: 7,
       club: 'Aston Villa',
-      logo: manchesterLogo,
+      logo: astonvilla_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 14,
@@ -128,7 +164,7 @@ export const teams = [
     {
       position: 8,
       club: 'Fulham',
-      logo: manchesterLogo,
+      logo: fulham_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 13,
@@ -144,7 +180,7 @@ export const teams = [
     {
       position: 9,
       club: 'Brighton And Hove Albion',
-      logo: manchesterLogo,
+      logo: brighton_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 12,
@@ -160,7 +196,7 @@ export const teams = [
     {
       position: 10,
       club: 'Bournemouth',
-      logo: manchesterLogo,
+      logo: bournemouth_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 12,
@@ -176,7 +212,7 @@ export const teams = [
     {
       position: 11,
       club: 'Crystal Palace',
-      logo: manchesterLogo,
+      logo: crystal_palace_logo,
       backgroundColor: '#DC5032',
       played: 30,
       won: 11,
@@ -192,7 +228,7 @@ export const teams = [
     {
       position: 12,
       club: 'Brentford',
-      logo: manchesterLogo,
+      logo: brentford_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 12,
@@ -208,7 +244,7 @@ export const teams = [
     {
       position: 13,
       club: 'Manchester United',
-      logo: manchesterLogo,
+      logo: man_united_logo,
       backgroundColor: '#DC5032',
       played: 31,
       won: 10,
@@ -220,5 +256,69 @@ export const teams = [
       points: 38,
       form: ['W', 'D', 'L', 'W', 'D'],
       next: 'Newcastle'
+    },
+    {
+      position: 14,
+      club: 'West Ham',
+      logo: wesham_logo,
+      backgroundColor: '#DC5032',
+      played: 31,
+      won: 9,
+      drawn: 5,
+      lost: 17,
+      gf: 43,
+      ga: 59,
+      gd: -16,
+      points: 32,
+      form: ['L', 'D', 'W', 'W', 'W'],
+      next: 'Newcastle'
     }
   ];
+
+export const matches = [
+  {
+    matchID: 1,
+    homeTeam: 'Man City',
+    homeLogo: man_city_logo,
+    awayTeam: 'Crystal Palace',
+    awayLogo: crystal_palace_logo,
+    time: '18:30',
+    stadium: 'Etihad Stadium, Manchester'
+  },
+  {
+    matchID: 2,
+    homeTeam: 'Brighton',
+    homeLogo: brighton_logo,
+    awayTeam: 'Leicester',
+    awayLogo: leicester_logo,
+    time: '21:00',
+    stadium: 'American Express Stadium, Falmer'
+  },
+  {
+    matchID: 3,
+    homeTeam: "Nott'm Forest",
+    homeLogo: nottingham_logo,
+    awayTeam: 'Everton',
+    awayLogo: everton_logo,
+    time: '21:00',
+    stadium: 'The City Ground, Nottingham'
+  },
+  {
+    matchID: 4,
+    homeTeam: 'Southampton',
+    homeLogo: southampton_logo,
+    awayTeam: 'Aston Villa',
+    awayLogo: astonvilla_logo,
+    time: '21:00',
+    stadium: "St. Mary's Stadium, Southampton"
+  },
+  {
+    matchID: 5,
+    homeTeam: 'Arsenal',
+    homeLogo: arsenal_logo,
+    awayTeam: 'Brentford',
+    awayLogo: brentford_logo,
+    time: '23:30',
+    stadium: 'Emirates Stadium, London'
+  }
+]; 

@@ -4,7 +4,7 @@ import { assets } from '../assets/assets'
 const MainBanner = () => {
   return (
     <div className='relative'>
-        <img src={assets.soccer_banner} alt="banner" className='w-full'/>
+        <img src={assets.soccer_banner} alt="banner" className='w-full object-contain'/>
         <div className='mx-auto max-w-[1376px] absolute inset-0'>
             <div className='flex-center flex-wrap h-[70vh]'>
                 <div className='flex flex-col ml-auto mr-30 max-w-[35%]'>

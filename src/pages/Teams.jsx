@@ -7,7 +7,7 @@ const Teams = () => {
   return (
     <div className='p-6 mx-auto'>
       <p className='text-2xl md:text-3xl font-medium my-6'>Teams</p>
-      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-1440px'>
+      <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8'>
         {teams.map((team)=>(
           <div key={team.position} 
           className='group cursor-pointer p-4 gap-2 border shadow rounded-lg flex flex-col justify-between w-75 h-50 hover:text-white transition-colors'
@@ -22,7 +22,7 @@ const Teams = () => {
             navigate(`/teams/${team.club}`);
             scrollTo(0,0);
             }}>
-            <img src={team.logo} alt={team.club} className='group-hover:scale-108 transition max-w-25'/>
+            <img src={team.logo} alt={team.club} className='group-hover:scale-108 transition w-25 max-h-[100px]'/>
             <div className='flex justify-between'> 
               <p className='text-md font-medium'>{team.club}</p>
               <i className="fa-solid fa-arrow-right"></i>
