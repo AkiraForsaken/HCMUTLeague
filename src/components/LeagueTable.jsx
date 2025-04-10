@@ -10,7 +10,7 @@ const LeagueTable = () => {
     return (
     <div className='overflow-x-auto p-4'>
         <table className='min-w-full bg-white shadow rounded-lg'>
-            <thead className='text-sm'>
+            <thead className='text-sm bg-[#eef0ec] p-[6px] mt-4'>
                 <tr>
                     <th className="p-2 text-left">Position</th>
                     <th className="p-2 text-left">Club</th>
