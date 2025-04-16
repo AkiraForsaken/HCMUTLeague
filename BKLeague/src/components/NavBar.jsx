@@ -1,73 +1,373 @@
-import React, {useState} from 'react'
-import { NavLink } from 'react-router-dom'
-import { assets } from '../assets/assets'
-import { useAppContext } from '../context/AppContext.jsx'
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { assets } from '../assets/assets';
+import { useAppContext } from '../context/AppContext.jsx';
 
 const NavBar = () => {
   const [open, setOpen] = useState(false);
-  const {user, setUser, setShowUserLogin, navigate} = useAppContext();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, setUser, setShowUserLogin } = useAppContext();
+  const navigate = useNavigate();
 
-  const logout = async ()=>{
+  const logout = () => {
     setUser(null);
-    navigate('/')
-  }
-  return (
-    <nav className="bg-purple-900 text-white pr-3 flex justify-between items-center shadow-md relative top-0 left-0 right-0">
+    localStorage.clear();
+    navigate('/');
+  };
 
-      <NavLink to='/' onClick={()=>setOpen(false)} className="flex items-center">
-        <img src={assets.bklogo} alt='bklogo' className='h-15'/>
-        <p className='text-2xl font-bold'>BK League</p>
+  return (
+    <nav className="bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-700 text-white px-6 py-4 flex justify-between items-center shadow-xl sticky top-0 z-50">
+      {/* Logo and Title */}
+      <NavLink to="/" onClick={() => setOpen(false)} className="flex items-center space-x-3">
+        <img
+          src={assets.bklogo}
+          alt="BK League Logo"
+          className="h-12 transition-transform duration-300 hover:scale-110"
+        />
+        <p className="text-3xl font-extrabold tracking-tight">HCMUT Premier League</p>
       </NavLink>
 
-      <div className="hidden sm:flex items-center gap-5">
-        <NavLink to="/" className="hover:text-gray-300">Home</NavLink>
-        <NavLink to="/matches" className="hover:text-gray-300">Matches</NavLink>
-        <NavLink to="/teams" className="hover:text-gray-300">Teams</NavLink>
-        <NavLink to="/booking" className="hover:text-gray-300">Booking</NavLink>
-        <NavLink to="/committee" className="hover:text-gray-300">Committee</NavLink>
-        {/* <NavLink to="/signin" className="hover:text-gray-300"><button>Sign In</button></NavLink> */}
+      {/* Desktop Navigation */}
+      <div className="hidden sm:flex items-center space-x-8">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/matches"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          Matches
+        </NavLink>
+        <NavLink
+          to="/teams"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          Teams
+        </NavLink>
+        <NavLink
+          to="/stadiums"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          Stadiums
+        </NavLink>
+        <NavLink
+          to="/booking"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          Booking
+        </NavLink>
+        <NavLink
+          to="/posts"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          News
+        </NavLink>
+        <NavLink
+          to="/pots"
+          className={({ isActive }) =>
+            `text-lg font-medium transition-colors duration-200 ${
+              isActive
+                ? 'text-amber-300 font-extrabold bg-indigo-800/50 px-3 py-1 rounded-full shadow-md'
+                : 'hover:text-amber-200'
+            }`
+          }
+        >
+          POTS
+        </NavLink>
+
         {!user ? (
-          <NavLink to='/signin'>
-            <button className="px-8 py-2 bg-indigo-500 hover:bg-primary transition text-white rounded-full" onClick={()=>{setShowUserLogin(true)}}>
+          <NavLink to="/signin">
+            <button
+              className="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
+              onClick={() => setShowUserLogin(true)}
+            >
               Login
             </button>
           </NavLink>
         ) : (
-          <div className='relative group'>
-            <img src={assets.profile_pic} alt='profile_pic' className='w-10 rounded-lg'/>
-            <ul className='hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40'>
-              <li onClick={()=>navigate("booking")} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer text-black'>My tickets</li>
-              <li onClick={logout} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer text-black'>Logout</li>
-            </ul>
+          <div className="relative">
+            {/* User Icon and Username */}
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center space-x-2 cursor-pointer focus:outline-none"
+            >
+              <svg
+                className="w-8 h-8 text-white hover:text-amber-300 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                />
+              </svg>
+              <span className="text-sm font-medium truncate max-w-[100px]">{user.username}</span>
+            </button>
+
+            {/* Dropdown Menu */}
+            {dropdownOpen && (
+              <ul className="absolute top-10 right-0 bg-white shadow-xl rounded-lg border border-gray-100 w-52 py-2 text-gray-800 text-sm z-50">
+                <li
+                  onClick={() => {
+                    navigate('/profile');
+                    setDropdownOpen(false);
+                  }}
+                  className="px-4 py-2 hover:bg-amber-50 hover:text-amber-600 cursor-pointer transition-colors duration-200"
+                >
+                  Profile
+                </li>
+                <li
+                  onClick={() => {
+                    navigate('/change-name');
+                    setDropdownOpen(false);
+                  }}
+                  className="px-4 py-2 hover:bg-amber-50 hover:text-amber-600 cursor-pointer transition-colors duration-200"
+                >
+                  Change Name
+                </li>
+                <li
+                  onClick={() => {
+                    navigate('/change-password');
+                    setDropdownOpen(false);
+                  }}
+                  className="px-4 py-2 hover:bg-amber-50 hover:text-amber-600 cursor-pointer transition-colors duration-200"
+                >
+                  Change Password
+                </li>
+                <li
+                  onClick={() => {
+                    navigate('/booking');
+                    setDropdownOpen(false);
+                  }}
+                  className="px-4 py-2 hover:bg-amber-50 hover:text-amber-600 cursor-pointer transition-colors duration-200"
+                >
+                  My Tickets
+                </li>
+                <li
+                  onClick={() => {
+                    logout();
+                    setDropdownOpen(false);
+                  }}
+                  className="px-4 py-2 hover:bg-red-50 hover:text-red-600 cursor-pointer transition-colors duration-200"
+                >
+                  Logout
+                </li>
+              </ul>
+            )}
           </div>
         )}
       </div>
 
-      {/* Mobile section - Don't care much */}
-      <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="sm:hidden">
-          <img src={assets.menu_icon} alt='menu' />
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle Menu"
+        className="sm:hidden text-white focus:outline-none"
+      >
+        <img src={assets.menu_icon} alt="menu" className="w-8 h-8" />
       </button>
 
-      { open && (
-        <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
-        <NavLink to="/" onClick={()=>setOpen(false)} className="hover:text-gray-300 text-black">Home</NavLink>
-        <NavLink to="/matches" onClick={()=>setOpen(false)} className="block hover:text-gray-300 text-black">Matches</NavLink>
-        <NavLink to="/teams" onClick={()=>setOpen(false)} className="block hover:text-gray-300 text-black">Teams</NavLink>
-        <NavLink to="/booking" onClick={()=>setOpen(false)} className="block hover:text-gray-300 text-black">Booking</NavLink>
-        <NavLink to="/committee" onClick={()=>setOpen(false)} className="block hover:text-gray-300 text-black">Committee</NavLink>
-        {/* <NavLink to="/signin" onClick={()=>setOpen(false)} className="block hover:text-gray-300 text-black"><button>Sign In</button></NavLink> */}
-        {!user ? (
-          <button className="px-8 py-2 bg-indigo-500 hover:bg-primary transition text-white rounded-full" onClick={()=>{setOpen(false);setShowUserLogin(true)}}>
-            Login
-          </button>
-        ) : (
-          <button className="px-8 py-2 bg-indigo-500 hover:bg-primary transition text-white rounded-full" onClick={logout}>
-            Logout
-          </button>
-        )}
-      </div>)}
-    </nav>
-  )
-}
+      {/* Mobile Menu */}
+      {open && (
+        <div className="absolute top-16 left-0 w-full bg-white shadow-xl py-6 flex flex-col items-start gap-4 px-6 text-gray-800 sm:hidden">
+          <NavLink
+            to="/"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/matches"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            Matches
+          </NavLink>
+          <NavLink
+            to="/teams"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            Teams
+          </NavLink>
+          <NavLink
+            to="/stadiums"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            Stadiums
+          </NavLink>
+          <NavLink
+            to="/booking"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            Booking
+          </NavLink>
+          <NavLink
+            to="/posts"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            News
+          </NavLink>
+          <NavLink
+            to="/pots"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `text-lg font-medium ${
+                isActive
+                  ? 'text-amber-600 font-extrabold bg-amber-100 px-3 py-1 rounded-full'
+                  : 'hover:text-amber-600'
+              } transition-colors duration-200`
+            }
+          >
+            POTS
+          </NavLink>
 
-export default NavBar
+          {!user ? (
+            <button
+              className="w-full px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105"
+              onClick={() => {
+                setOpen(false);
+                setShowUserLogin(true);
+              }}
+            >
+              Login
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  navigate('/profile');
+                  setOpen(false);
+                }}
+                className="w-full text-left px-6 py-2 hover:bg-amber-50 hover:text-amber-600 transition-colors duration-200"
+              >
+                Profile
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/change-name');
+                  setOpen(false);
+                }}
+                className="w-full text-left px-6 py-2 hover:bg-amber-50 hover:text-amber-600 transition-colors duration-200"
+              >
+                Change Name
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/change-password');
+                  setOpen(false);
+                }}
+                className="w-full text-left px-6 py-2 hover:bg-amber-50 hover:text-amber-600 transition-colors duration-200"
+              >
+                Change Password
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/booking');
+                  setOpen(false);
+                }}
+                className="w-full text-left px-6 py-2 hover:bg-amber-50 hover:text-amber-600 transition-colors duration-200"
+              >
+                My Tickets
+              </button>
+              <button
+                onClick={() => {
+                  logout();
+                  setOpen(false);
+                }}
+                className="w-full px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default NavBar;
