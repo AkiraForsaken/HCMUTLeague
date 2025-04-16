@@ -1,7 +1,7 @@
 import bklogo from './bklogo.png'
 import menu_icon from './menu_icon.svg'
 import profile_pic from './profile_pic.png'
-import soccer_banner from './soccer_banner.png'
+import soccer_banner from './soccer_banner.jpg'
 import man_united_logo from './man_united-removebg-preview.png'
 import arsenal_logo from './arsenal-removebg-preview.png'
 import liverpool_logo from './liverpool-removebg-preview.png'
@@ -21,6 +21,23 @@ import southampton_logo from './southampton-removebg-preview.png'
 import tottenham_logo from './tottenham-removebg-preview.png'
 import wesham_logo from './west_ham-removebg-preview.png'
 import wolves_logo from './wolves-removebg-preview.png'
+
+// stadium view
+import oldtrafford from './oldtrafford.jpg';
+import anfield from './anfield.jpg';
+import stamfordbridge from './stamfordbridge.jpg';
+import emiratesstadium from './emiratesstadium.jpg';
+import etihadstadium from './etihadstadium.jpg';
+import tottenhamhotspurstadium from './tottenhamhotspurstadium.jpg';
+import goodisonpark from './goodisonpark.jpg';
+import kingpowerstadium from './kingpowerstadium.jpg';
+import ellandroad from './ellandroad.jpg';
+import londonstadium from './londonstadium.jpg';
+import stjamespark from './stjamespark.jpg';
+import villapark from './villapark.jpg';
+import amexstadium from './amexstadium.jpg';
+import molineuxstadium from './molineuxstadium.jpg';
+import stmarysstadium from './stmarysstadium.jpg';
 
 export const assets = {
     bklogo,
@@ -45,7 +62,22 @@ export const assets = {
     tottenham_logo,
     wesham_logo,
     wolves_logo,
-    soccer_banner
+    soccer_banner,
+    oldtrafford,
+    anfield,
+    stamfordbridge,
+    emiratesstadium,
+    etihadstadium,
+    tottenhamhotspurstadium,
+    goodisonpark,
+    kingpowerstadium,
+    ellandroad,
+    londonstadium,
+    stjamespark,
+    villapark,
+    amexstadium,
+    molineuxstadium,
+    stmarysstadium,
 }
 
 export const teams = [
