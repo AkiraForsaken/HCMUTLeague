@@ -4,7 +4,9 @@ import MatchList from '../components/MatchList'
 const Matches = () => {
   return (
     <div className='min-h-screen text-center'>
-        <MatchList></MatchList>
+        <div className="animate-fade-in">
+          <MatchList></MatchList>
+        </div>
     </div>
   )
 }

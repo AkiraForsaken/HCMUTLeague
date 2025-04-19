@@ -6,13 +6,18 @@ const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
+
+  // Initialize user from localStorage
   const [user, setUser] = useState(() => {
-    const token = localStorage.getItem('token');
-    const role = localStorage.getItem('role');
-    const username = localStorage.getItem('username');
-    console.log('Initial state check - Token:', token, 'Role:', role, 'Username:', username);
-    return token && role && username ? { username, role } : null;
+    const storedUsername = localStorage.getItem('username');
+    const storedRole = localStorage.getItem('role');
+    console.log('Initial state check - Username:', storedUsername, 'Role:', storedRole);
+    return storedUsername && storedRole ? { username: storedUsername, role: storedRole } : null;
   });
+
+  // Initialize token from localStorage
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+
   const [isAdmin, setIsAdmin] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [leagueTeams, setLeagueTeams] = useState([]);
@@ -26,53 +31,31 @@ const AppContextProvider = ({ children }) => {
     setLeagueMatches(matches);
   };
 
-  const restoreUser = async () => {
-    const token = localStorage.getItem('token');
-    console.log('Restoring user - Token exists:', !!token);
-    if (!token) {
-      console.log('No token found, user remains null');
-      return;
-    }
+  // Login function to set user and token
+  const login = (newToken, newUser) => {
+    setToken(newToken);
+    setUser(newUser);
+    localStorage.setItem('token', newToken);
+    localStorage.setItem('username', newUser.username);
+    localStorage.setItem('role', newUser.role);
+    console.log('Logged in - Token:', newToken, 'User:', newUser);
+  };
 
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/profile', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      console.log('Profile fetch status:', res.status);
-
-      const result = await res.json();
-      console.log('Profile fetch result:', result);
-
-      if (result.success) {
-        const restoredUser = { username: result.data.username, role: result.data.role };
-        setUser(restoredUser);
-        localStorage.setItem('username', result.data.username);
-        localStorage.setItem('role', result.data.role);
-        console.log('User restored successfully:', restoredUser);
-      } else {
-        console.log('Profile fetch failed:', result.error);
-        if (res.status === 401) { // Token explicitly invalid or expired
-          setUser(null);
-          localStorage.clear();
-          navigate('/signin');
-          console.log('Token invalid, logged out');
-        }
-      }
-    } catch (err) {
-      console.error('Error during restoreUser:', err.message);
-      // Don’t clear user state on network errors, only on explicit auth failure
-    }
+  // Logout function to clear states and localStorage
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    navigate('/signin');
+    console.log('Logged out');
   };
 
   useEffect(() => {
     console.log('AppContext useEffect triggered');
     fetchTeams();
     fetchMatches();
-    restoreUser();
   }, []);
 
   useEffect(() => {
@@ -83,7 +66,9 @@ const AppContextProvider = ({ children }) => {
   const value = {
     navigate,
     user,
-    setUser,
+    token,
+    login,
+    logout,
     isAdmin,
     setIsAdmin,
     showUserLogin,

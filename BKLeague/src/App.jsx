@@ -11,6 +11,9 @@ import Committee from './pages/Committee';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Stadiums from './pages/Stadium';
+import MatchPage from './pages/MatchPage.jsx';  
+import MyTickets from './pages/MyTickets.jsx';
+import TicketDetails from './pages/TicketDetails.jsx';
 
 function App() {
   return (
@@ -21,13 +24,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/matches/:matchId" element={<MatchPage />} />
+          <Route path="/matches/:matchId/booking" element={<Booking />} />
           <Route path="/teams/*" element={<Teams />} />
-          <Route path="/booking" element={<Booking />} />
           <Route path="/committee" element={<Committee />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/stadiums/*" element={<Stadiums />} />
+          <Route path="/mytickets" element={<MyTickets />} />
+          <Route path="/mytickets/:viewMatchId" element={<TicketDetails />} />
         </Routes>
       </div>
     </AppContextProvider>

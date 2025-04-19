@@ -30,6 +30,7 @@ setupDatabase(pool);
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the My League API! Use /api endpoints to interact.' });
 });
+
 // Routes
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
@@ -37,6 +38,17 @@ const teamsRouter = require('./routes/teams');
 app.use('/api/teams', teamsRouter);
 const stadiumRouter = require('./routes/stadiums');
 app.use('/api/stadiums', stadiumRouter);
+const matchesRouter = require('./routes/matches');
+app.use('/api/matches', matchesRouter);
+const bookingRouter = require('./routes/booking');
+app.use('/api/booking', bookingRouter);
+const groupsRouter = require('./routes/leaguetable');
+app.use('/api/groups', groupsRouter);
+const myTicketsRouter = require('./routes/mytickets');
+app.use('/api/mytickets', myTicketsRouter);
+app.get('/api/auth/user', require('./routes/middleware').authMiddleware, (req, res) => {
+  res.json({ role: req.user.role });
+});
 
 // Global error handler
 app.use((err, req, res, next) => {

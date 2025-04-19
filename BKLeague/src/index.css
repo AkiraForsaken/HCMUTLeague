@@ -1,5 +1,6 @@
 @import "tailwindcss";
-
+@tailwind components;
+@tailwind utilities;
 @theme {
     --color-primary: #512da8;
     --color-primary-dull: #290d6e;
@@ -32,3 +33,12 @@
 @utility text-gradient {
     @apply bg-linear-to-r from-[#552586] to-[#804FB3] bg-clip-text text-transparent;
 }
+
+@keyframes fade-in {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
