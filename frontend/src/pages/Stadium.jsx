@@ -63,7 +63,9 @@ const StadiumList = ({ stadiums, loading, error }) => {
                 />
                 <div className="absolute inset-0 border-4 border-transparent hover:border-indigo-300/50 rounded-t-3xl transition"></div>
               </div>
-              <div className="p-6 flex flex-col items-center space-y-3">
+              <div className="p-6
+
+ flex flex-col items-center space-y-3">
                 <h2 className="text-3xl font-semibold text-indigo-900">
                   {stadium.stadium_name}
                 </h2>
@@ -152,7 +154,7 @@ const StadiumDetails = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-16 px-6">
-      <div className="max-w-5xl mx-auto bg-white/70 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden">
+      <div className="max-w-5xl mx-auto bg-white/70 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden animate-fade-in" style={{ animationDelay: '100ms' }}>
         {/* Header with Large Image */}
         <div className="relative w-full h-[32rem] rounded-t-3xl overflow-hidden">
           <img
@@ -223,8 +225,8 @@ const StadiumDetails = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4m-8 4V9m4 12V9" />
                   </svg>
                 )],
-              ].map(([label, value, icon]) => (
-                <div key={label} className="flex items-center space-x-4">
+              ].map(([label, value, icon], index) => (
+                <div key={label} className="flex items-center space-x-4 animate-fade-in" style={{ animationDelay: `${200 + index * 100}ms` }}>
                   {icon}
                   <div>
                     <p className="text-sm text-gray-500">{label}</p>

@@ -57,7 +57,7 @@ const MemberDetails = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-16 px-6">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '100ms' }}>
         <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-10">
           <h1 className="text-4xl font-extrabold text-indigo-900 mb-8 text-center">
             {member.full_name}
@@ -99,7 +99,7 @@ const MemberDetails = () => {
                   )],
                   ['Weight', member.weight ? `${member.weight} kg` : 'N/A', (
                     <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-4m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-4m0-2v2m0 16V5m0 16H9m3 0h3" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 12h12M6 12V9m0 3v3m12-3V9m0 3v3M4 15V9m16 6V9" />
                     </svg>
                   )],
                   ['Height', member.height ? `${member.height} cm` : 'N/A', (
@@ -135,8 +135,8 @@ const MemberDetails = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 )],
-              ].map(([label, value, icon]) => (
-                <div key={label} className="flex items-center space-x-4">
+              ].map(([label, value, icon], index) => (
+                <div key={label} className="flex items-center space-x-4 animate-fade-in" style={{ animationDelay: `${100 + index * 100}ms` }}>
                   {icon}
                   <div>
                     <p className="text-sm text-gray-500">{label}</p>

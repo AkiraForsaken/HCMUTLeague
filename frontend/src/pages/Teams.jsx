@@ -55,11 +55,12 @@ const TeamList = ({ teams, loading, error }) => {
         Our Teams
       </h1>
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto">
-        {teams.map(team => (
+        {teams.map((team, index) => (
           <div
             key={team.team_id}
             onClick={() => navigate(`/teams/${encodeURIComponent(team.team_name)}`)}
-            className="cursor-pointer bg-white/70 backdrop-blur-md rounded-3xl p-6 flex flex-col items-center space-y-4 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all"
+            className="cursor-pointer bg-white/70 backdrop-blur-md rounded-3xl p-6 flex flex-col items-center space-y-4 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all animate-fade-in"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             {team.team_logo_url ? (
               <img
@@ -163,7 +164,7 @@ const TeamDetails = () => {
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Team Information Card */}
-        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden">
+        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden animate-fade-in" style={{ animationDelay: '100ms' }}>
           {/* Header */}
           <div className={`relative ${getTeamLogoBgColor(team.team_name)} p-12 text-white text-center`}>
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/subtle-stripes.png')] opacity-10"></div>
@@ -226,8 +227,8 @@ const TeamDetails = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   )],
-                ].map(([label, value, icon]) => (
-                  <div key={label} className="flex items-center space-x-4">
+                ].map(([label, value, icon], index) => (
+                  <div key={label} className="flex items-center space-x-4 animate-fade-in" style={{ animationDelay: `${100 + index * 100}ms` }}>
                     {icon}
                     <div>
                       <p className="text-sm text-gray-500">{label}</p>
@@ -249,7 +250,7 @@ const TeamDetails = () => {
         </div>
 
         {/* Team Members Card */}
-        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-10">
+        <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl p-10 animate-fade-in" style={{ animationDelay: '200ms' }}>
           <h2 className="text-3xl font-bold text-indigo-900 mb-8 tracking-tight">Team Personnel</h2>
           <div className="space-y-8">
             {/* Coaches */}
@@ -264,7 +265,8 @@ const TeamDetails = () => {
                     <li
                       key={index}
                       onClick={() => navigate(`/teams/${encodeURIComponent(team.team_name)}/members/${encodeURIComponent(coach.com_id)}`)}
-                      className="cursor-pointer flex items-center justify-between bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:bg-gray-100/50 transition"
+                      className="cursor-pointer flex items-center justify-between bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:bg-gray-100/50 transition animate-fade-in"
+                      style={{ animationDelay: `${300 + index * 100}ms` }}
                     >
                       <div className="flex items-center space-x-3">
                         <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -292,7 +294,8 @@ const TeamDetails = () => {
                     <li
                       key={index}
                       onClick={() => navigate(`/teams/${encodeURIComponent(team.team_name)}/members/${encodeURIComponent(player.com_id)}`)}
-                      className="cursor-pointer flex items-center justify-between bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:bg-gray-100/50 transition"
+                      className="cursor-pointer flex items-center justify-between bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:bg-gray-100/50 transition animate-fade-in"
+                      style={{ animationDelay: `${300 + index * 100}ms` }}
                     >
                       <div className="flex items-center space-x-3">
                         <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -323,7 +326,8 @@ const TeamDetails = () => {
                     <li
                       key={index}
                       onClick={() => navigate(`/teams/${encodeURIComponent(team.team_name)}/members/${encodeURIComponent(doctor.com_id)}`)}
-                      className="cursor-pointer flex items-center justify-between bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:bg-gray-100/50 transition"
+                      className="cursor-pointer flex items-center justify-between bg-white/50 backdrop-blur-sm rounded-lg p-4 shadow-sm hover:bg-gray-100/50 transition animate-fade-in"
+                      style={{ animationDelay: `${300 + index * 100}ms` }}
                     >
                       <div className="flex items-center space-x-3">
                         <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

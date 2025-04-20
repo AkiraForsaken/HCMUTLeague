@@ -6,14 +6,8 @@ import { useAppContext } from '../context/AppContext.jsx';
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { user, setUser, setShowUserLogin } = useAppContext();
+  const { user, logout, setShowUserLogin } = useAppContext();
   const navigate = useNavigate();
-
-  const logout = () => {
-    setUser(null);
-    localStorage.clear();
-    navigate('/');
-  };
 
   return (
     <nav className="bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-700 text-white px-6 py-4 flex justify-between items-center shadow-xl sticky top-0 z-50">
@@ -179,7 +173,7 @@ const NavBar = () => {
                 </li>
                 <li
                   onClick={() => {
-                    navigate('/booking');
+                    navigate('/mytickets');
                     setDropdownOpen(false);
                   }}
                   className="px-4 py-2 hover:bg-amber-50 hover:text-amber-600 cursor-pointer transition-colors duration-200"
@@ -346,7 +340,7 @@ const NavBar = () => {
               </button>
               <button
                 onClick={() => {
-                  navigate('/booking');
+                  navigate('/mytickets');
                   setOpen(false);
                 }}
                 className="w-full text-left px-6 py-2 hover:bg-amber-50 hover:text-amber-600 transition-colors duration-200"
