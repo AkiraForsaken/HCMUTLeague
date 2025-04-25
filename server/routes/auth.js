@@ -444,6 +444,7 @@ router.post('/register/spectator', async (req, res, next) => {
   }
 });
 
+// Get profile
 router.get('/profile', authMiddleware, async (req, res, next) => {
   const pool = req.app.get('db');
   const userId = req.user.userid;
@@ -570,6 +571,136 @@ router.get('/profile', authMiddleware, async (req, res, next) => {
         break;
     }
     res.json({ success: true, data: profileData });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update profile
+router.put('/profile', authMiddleware, async (req, res, next) => {
+  const pool = req.app.get('db');
+  const userId = req.user.userid;
+  const userRole = req.user.role;
+  const updates = req.body;
+
+  try {
+    // Hash the password if it's being updated
+    let hashedPassword = null;
+    if (updates.password) {
+      hashedPassword = await bcrypt.hash(updates.password, 10);
+    }
+    console.log('Received Updates:', updates, ' and userID:', userId);
+    // Update basic user info
+    await pool.query(
+      `UPDATE users 
+       SET username = $1, email = $2, password = COALESCE($3, password) 
+       WHERE id = $4`,
+      [updates.username, updates.email, hashedPassword, userId]
+    );
+
+    // Update role-specific details
+    switch (userRole) {
+      case 'Player':
+        await pool.query(
+          `UPDATE player SET com_first_name = $1, com_last_name = $2, age = $3, com_street = $4, postal_code = $5,
+           squad_number = $6, position_player = $7, weight = $8, height = $9
+           WHERE com_id = $10`,
+          [
+            updates.player_info.com_first_name, updates.player_info.com_last_name, updates.player_info.age,
+            updates.player_info.com_street, updates.player_info.postal_code, updates.player_info.squad_number,
+            updates.player_info.position_player, updates.player_info.weight, updates.player_info.height, userId,
+          ]
+        );
+        break;
+
+      case 'Coach':
+        await pool.query(
+          `UPDATE coach SET com_first_name = $1, com_last_name = $2, age = $3, com_street = $4, postal_code = $5,
+            coach_title = $6 WHERE com_id = $7`,
+          [
+            updates.coach_info.com_first_name, updates.coach_info.com_last_name, updates.coach_info.age,
+            updates.coach_info.com_street, updates.coach_info.postal_code, updates.coach_info.coach_title, userId,
+          ]
+        );
+        break;
+
+      case 'Personal Doctor':
+        await pool.query(
+          `UPDATE personal_doctor SET com_first_name = $1, com_last_name = $2, age = $3, com_street = $4, postal_code = $5,
+           doctor_title = $6, supported_player_id = $7 WHERE com_id = $8`,
+          [
+            updates.doctor_info.com_first_name, updates.doctor_info.com_last_name, updates.doctor_info.age, updates.doctor_info.com_street, updates.doctor_info.postal_code,
+            updates.doctor_info.doctor_title, updates.doctor_info.supported_player_id, userId,
+          ]
+        );
+        break;
+
+      case 'Club Doctor':
+        await pool.query(
+          `UPDATE club_doctor SET com_first_name = $1, com_last_name = $2, age = $3, com_street = $4, postal_code = $5,
+           doctor_title = $6 WHERE com_id = $7`,
+          [
+            updates.club_doctor_info.com_first_name, updates.club_doctor_info.com_last_name, updates.club_doctor_info.age, updates.club_doctor_info.com_street, updates.club_doctor_info.postal_code,
+            updates.club_doctor_info.doctor_title, userId,
+          ]
+        );
+        break;
+
+      case 'Main Referee':
+        await pool.query(
+          `UPDATE main_referee SET com_mem_first_name = $1, com_mem_last_name = $2, nationality = $3
+           WHERE com_mem_id = $4`,
+          [
+            updates.committee_info.first_name, updates.committee_info.last_name, updates.committee_info.nationality, userId,
+          ]
+        );
+        break;
+
+      case 'Match Manager':
+        await pool.query(
+          `UPDATE match_manager SET com_mem_first_name = $1, com_mem_last_name = $2, nationality = $3
+           WHERE com_mem_id = $4`,
+          [
+            updates.committee_info.first_name, updates.committee_info.last_name, updates.committee_info.nationality, userId,
+          ]
+        );
+        break;
+
+      case 'Video Assistant Referee':
+        await pool.query(
+          `UPDATE video_assistant_referee SET com_mem_first_name = $1, com_mem_last_name = $2, nationality = $3
+           WHERE com_mem_id = $4`,
+          [
+            updates.committee_info.first_name, updates.committee_info.last_name, updates.committee_info.nationality, userId,
+          ]
+        );
+        break;
+
+      case 'Sponsor':
+        await pool.query(
+          `UPDATE sponsor SET com_mem_first_name = $1, com_mem_last_name = $2, nationality = $3
+           WHERE com_mem_id = $4`,
+          [
+            updates.committee_info.first_name, updates.committee_info.last_name, updates.committee_info.nationality, userId,
+          ]
+        );
+        break;
+
+      case 'Spectator':
+        await pool.query(
+          `UPDATE spectator SET spectator_first_name = $1, spectator_last_name = $2, nationality = $3
+           WHERE spectator_id = $4`,
+          [
+            updates.committee_info.first_name, updates.committee_info.last_name, updates.committee_info.nationality, userId,
+          ]
+        );
+        break;
+
+      default:
+        return res.status(400).json({ success: false, error: 'Invalid role' });
+    }
+
+    res.json({ success: true, message: 'Profile updated successfully' });
   } catch (err) {
     next(err);
   }

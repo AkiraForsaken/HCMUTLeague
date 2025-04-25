@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext.jsx';
+import toast from 'react-hot-toast';
 
 const MyTickets = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const MyTickets = () => {
       }
 
       setTickets(tickets.filter((ticket) => ticket.view_match_id !== viewMatchId));
-      alert('Ticket cancelled successfully!');
+      toast.success('Ticket cancelled successfully!');
     } catch (err) {
       setError(err.message);
     }

@@ -104,7 +104,7 @@ const MatchList = () => {
         {finishedMatches.length > 0 && (
           <div className="mb-12">
             <h1 className="text-5xl font-extrabold text-indigo-800 mb-8">
-              Our Matches
+              Previous Matches
             </h1>
             {Object.entries(groupedMatches)
               .filter(([date]) => finishedMatches.some((m) => m.match_date === date))
