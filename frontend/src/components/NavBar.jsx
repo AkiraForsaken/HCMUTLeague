@@ -71,7 +71,7 @@ const NavBar = () => {
         >
           Stadiums
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/booking"
           className={({ isActive }) =>
             `text-lg font-medium transition-colors duration-200 ${
@@ -82,7 +82,7 @@ const NavBar = () => {
           }
         >
           Booking
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/posts"
           className={({ isActive }) =>
@@ -108,7 +108,7 @@ const NavBar = () => {
           POTS
         </NavLink>
 
-        {!user ? (
+        {!user ? ( // If user hasnt logged in
           <NavLink to="/signin">
             <button
               className="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
@@ -117,7 +117,7 @@ const NavBar = () => {
               Login
             </button>
           </NavLink>
-        ) : (
+        ) : ( // If user has logged in
           <div className="relative">
             {/* User Icon and Username */}
             <button
@@ -153,7 +153,7 @@ const NavBar = () => {
                 >
                   Profile
                 </li>
-                <li
+                {/* <li
                   onClick={() => {
                     navigate('/change-name');
                     setDropdownOpen(false);
@@ -170,7 +170,7 @@ const NavBar = () => {
                   className="px-4 py-2 hover:bg-amber-50 hover:text-amber-600 cursor-pointer transition-colors duration-200"
                 >
                   Change Password
-                </li>
+                </li> */}
                 <li
                   onClick={() => {
                     navigate('/mytickets');

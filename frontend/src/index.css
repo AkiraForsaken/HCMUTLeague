@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @tailwind components;
 @tailwind utilities;
@@ -25,15 +26,16 @@
 }
 
 @utility flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @utility text-gradient {
-    @apply bg-linear-to-r from-[#552586] to-[#804FB3] bg-clip-text text-transparent;
+  @apply bg-linear-to-r from-[#552586] to-[#804FB3] bg-clip-text text-transparent;
 }
 
+/* MAIN BANNER CSS */
 @keyframes fade-in {
     0% { opacity: 0; transform: translateY(10px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -42,3 +44,68 @@
   .animate-fade-in {
     animation: fade-in 0.5s ease-out;
   }
+        
+@keyframes gentle-fade {
+    0% {
+      opacity: 0.5;
+      transform: scale(1.15);
+    }
+    100% {
+      opacity: 0.70;
+      transform: scale(1);
+    }
+}
+@keyframes smooth-reveal {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+@keyframes slide-up {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}
+@keyframes cta-reveal {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+}
+@keyframes overlay-smooth {
+    0% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0.6;
+    }
+}
+.animate-gentle-fade {
+  animation: gentle-fade 6s ease-in-out forwards;
+}
+.animate-smooth-reveal {
+  animation: smooth-reveal 1.5s ease-in forwards;
+}
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+}
+.delay-200 {
+  animation-delay: 0.3s;
+}
+.animate-cta-reveal {
+  animation: cta-reveal 1s ease-out 0.5s forwards;
+}
+.animate-overlay-smooth {
+  animation: overlay-smooth 4s ease-in forwards;
+}

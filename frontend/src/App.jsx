@@ -11,16 +11,18 @@ import Committee from './pages/Committee';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Stadiums from './pages/Stadium';
+import News from './pages/News.jsx';
 import MatchPage from './pages/MatchPage.jsx';  
 import MyTickets from './pages/MyTickets.jsx';
 import TicketDetails from './pages/TicketDetails.jsx';
+import EditProfile from './pages/EditProfile.jsx';
 
 function App() {
   return (
     <AppContextProvider>
       <div>
         <NavBar />
-        <Toaster />
+        <Toaster position='bottom-right' toastOptions={{duration:2000}}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/matches" element={<Matches />} />
@@ -31,7 +33,9 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path='edit-profile' element={<EditProfile />} />
           <Route path="/stadiums/*" element={<Stadiums />} />
+          <Route path="/posts" element={<News />} />
           <Route path="/mytickets" element={<MyTickets />} />
           <Route path="/mytickets/:viewMatchId" element={<TicketDetails />} />
         </Routes>

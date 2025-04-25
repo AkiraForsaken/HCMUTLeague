@@ -63,9 +63,7 @@ const StadiumList = ({ stadiums, loading, error }) => {
                 />
                 <div className="absolute inset-0 border-4 border-transparent hover:border-indigo-300/50 rounded-t-3xl transition"></div>
               </div>
-              <div className="p-6
-
- flex flex-col items-center space-y-3">
+              <div className="p-6 flex flex-col items-center space-y-3">
                 <h2 className="text-3xl font-semibold text-indigo-900">
                   {stadium.stadium_name}
                 </h2>
