@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = 'http://localhost:5000';
+
 // Helper to turn "team_logo_url" into "Team Logo URL"
-function prettifyFieldName(field) {
+export function prettifyFieldName(field) {
   return field
     .split('_')
     .map((segment) => {
@@ -17,6 +20,7 @@ function prettifyFieldName(field) {
 const Register = () => {
   const [selectedRole, setSelectedRole] = useState('');
   const [formData, setFormData] = useState({});
+  const [teams, setTeams] = useState([]); // For team selection in form
   const navigate = useNavigate();
 
   // Mapping of roles to their required fields
@@ -89,6 +93,29 @@ const Register = () => {
     { id: 'sponsor', label: 'Sponsor' },
   ];
 
+  // Fetch teams for selection
+  useEffect(()=>{
+    const fetchTeams = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/teams`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const result = await res.json();
+        if (result.success) {
+          setTeams(result.data);
+        } else {
+          toast.error('Failed to fetch teams');
+        } 
+      } catch (err) {
+        console.error(err);
+        toast.error('Error fetching teams');
+      }
+    }
+
+    fetchTeams();
+  }, []);
+
   // Handle role selection
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
@@ -108,10 +135,10 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedRole) {
-      alert('Please select a role');
+      toast.error('Please select a role');
       return;
     }
-    const apiURL = `http://localhost:5000/api/auth${roleEndpoints[selectedRole]}`;
+    const apiURL = `${API_BASE_URL}/api/auth${roleEndpoints[selectedRole]}`;
     try {
       const res = await fetch(apiURL, {
         method: 'POST',
@@ -120,14 +147,14 @@ const Register = () => {
       });
       const result = await res.json();
       if (result.success) {
-        alert('Registration successful! You can now log in.');
+        toast.success('Registration successful! You can now log in.');
         navigate('/signin');
       } else {
-        alert(result.error);
+        toast.error(result.error);
       }
     } catch (err) {
       console.error(err);
-      alert('Something went wrong.');
+      toast.error('Something went wrong.');
     }
   };
 
@@ -183,7 +210,7 @@ const Register = () => {
                 Register as {roles.find((r) => r.id === selectedRole)?.label}
               </h3>
               <div className="space-y-4">
-                {roleFields[selectedRole].map((field) => (
+                {roleFields[selectedRole].map((field) => ( // Map each field into an input
                   <div key={field} className="w-full">
                     <label
                       htmlFor={field}
@@ -191,15 +218,34 @@ const Register = () => {
                     >
                       {prettifyFieldName(field)}
                     </label>
-                    <input
-                      id={field}
-                      type={fieldTypes[field] || 'text'}
-                      value={formData[field] || ''}
-                      onChange={handleInputChange(field)}
-                      placeholder={`Enter ${prettifyFieldName(field)}`}
-                      className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 font-inter"
-                      required
-                    />
+                    {field === "team_name" ? // Team name drop down select
+                      <select 
+                        id={field}
+                        value={formData[field] || ''}
+                        onChange={handleInputChange(field)}
+                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 font-inter"
+                        required
+                      >
+                        <option value="" disabled>
+                          Select a team
+                        </option>
+                        {teams.map((team) => (
+                          <option key={team.team_id} value={team.team_name}>
+                            {team.team_name}
+                          </option>
+                        ))}
+                      </select>
+                    : 
+                      <input
+                        id={field}
+                        type={fieldTypes[field] || 'text'}
+                        value={formData[field] || ''}
+                        onChange={handleInputChange(field)}
+                        placeholder={`Enter ${prettifyFieldName(field)}`}
+                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 font-inter"
+                        required
+                      />
+                    }
                   </div>
                 ))}
               </div>

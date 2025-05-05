@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { useAppContext } from '../context/AppContext.jsx';
 import './login.css';
 
@@ -39,14 +40,14 @@ const Signin = () => {
       if (result.success) {
         const newUser = { username: userData.username, role: result.data.role };
         login(result.data.token, newUser);
-        alert('Login successful!');
+        toast.success('Login successful!');
         navigate('/');
       } else {
-        alert(result.error);
+        toast.error(result.error);
       }
     } catch (err) {
       console.error('Login error:', err);
-      alert('Something went wrong.');
+      toast.error('Something went wrong.');
     }
   };
 
@@ -96,12 +97,12 @@ const Signin = () => {
         </form>
         <p className="text-center text-purple-800">
           Don't have an account?{' '}
-          <Link
+          <NavLink
             to="/register"
             className="text-purple-600 font-medium hover:text-purple-800 hover:underline transition-colors duration-200"
           >
             Register here
-          </Link>
+          </NavLink>
         </p>
       </div>
     </div>
