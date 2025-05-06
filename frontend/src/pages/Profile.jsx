@@ -354,7 +354,7 @@ const Profile = () => {
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-100/80 backdrop-blur-sm p-6 space-x-2">
+        <div className="bg-gray-100/80 backdrop-blur-sm p-6 flex-center space-x-2">
           {['Player', 'Coach', 'Main Referee', 'Match Manager', 'Video Assistant Referee', 'Sponsor'].includes(user.role) && (
             <button
               onClick={() => navigate('/nextmatch')}
@@ -445,7 +445,7 @@ const Profile = () => {
             onClick={() => navigate('/edit-profile')}
             className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 shadow-md"
           >
-            <span className="h-5">
+            <span className="text-base font-medium">
               Change information
             </span>
           </button>

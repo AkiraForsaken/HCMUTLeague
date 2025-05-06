@@ -83,7 +83,7 @@ const NavBar = () => {
         >
           Booking
         </NavLink> */}
-        <NavLink
+        {/* <NavLink
           to="/posts"
           className={({ isActive }) =>
             `text-lg font-medium transition-colors duration-200 ${
@@ -106,7 +106,7 @@ const NavBar = () => {
           }
         >
           POTS
-        </NavLink>
+        </NavLink> */}
 
         {!user ? ( // If user hasnt logged in
           <NavLink to="/signin">

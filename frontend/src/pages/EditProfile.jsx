@@ -10,27 +10,27 @@ const EditProfile = () => {
         admin: ['username', 'password', 'email'],
         team: ['name', 'city', 'country', 'trophy', 'team_logo_url'],
         player: [
-            'username', 'password', 'email', 'first_name', 'last_name', 'age',
+            'username', 'password', 'email', 'com_first_name', 'com_last_name', 'age',
             'com_street', 'postal_code', 'squad_number', 'position_player',
             'weight', 'height', 'team_name',
         ],
         coach: [
-            'username', 'password', 'email', 'first_name', 'last_name', 'age',
+            'username', 'password', 'email', 'com_first_name', 'com_last_name', 'age',
             'com_street', 'postal_code', 'team_name', 'coach_title',
         ],
         personal_doctor: [
-            'username', 'password', 'email', 'first_name', 'last_name', 'age',
+            'username', 'password', 'email', 'com_first_name', 'com_last_name', 'age',
             'com_street', 'postal_code', 'team_name', 'doctor_title',
             'supported_player_id',
         ],
         club_doctor: [
-            'username', 'password', 'email', 'first_name', 'last_name', 'age',
+            'username', 'password', 'email', 'com_first_name', 'com_last_name', 'age',
             'com_street', 'postal_code', 'team_name', 'doctor_title',
         ],
-        main_referee: ['username', 'password', 'email', 'first_name', 'last_name', 'nationality'],
-        match_manager: ['username', 'password', 'email', 'first_name', 'last_name', 'nationality'],
-        video_assistant_referee: ['username', 'password', 'email', 'first_name', 'last_name', 'nationality'],
-        sponsor: ['username', 'password', 'email', 'first_name', 'last_name', 'nationality'],
+        main_referee: ['username', 'password', 'email', 'com_mem_first_name', 'com_mem_last_name', 'nationality'],
+        match_manager: ['username', 'password', 'email', 'com_mem_first_name', 'com_mem_last_name', 'nationality'],
+        video_assistant_referee: ['username', 'password', 'email', 'com_mem_first_name', 'last_name', 'nationality'],
+        sponsor: ['username', 'password', 'email', 'com_mem_first_name', 'com_mem_last_name', 'nationality'],
         spectator: ['username', 'password', 'email', 'first_name', 'last_name', 'nationality'],
     };
 
@@ -196,7 +196,7 @@ const EditProfile = () => {
                     <label className="block text-sm font-medium text-gray-700">
                         {prettifyFieldName(field)}
                     </label>
-                    {field === 'team_name' ? (
+                    {field === 'team_name' ? ( // TEAM DROPDOWN
                     <select
                         value={
                         role === 'main_referee' || role === 'match_manager' || role === 'video_assistant_referee' || role === 'sponsor' || role === 'spectator'
