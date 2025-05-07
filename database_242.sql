@@ -274,7 +274,7 @@ CREATE TABLE personal_doctor (
 
 CREATE TABLE competitor_entrance_permission (
     com_id VARCHAR(20),
-    entrance_ticket VARCHAR(50) NOT NULL,
+    entrance_ticket SERIAL PRIMARY KEY,
     match_id VARCHAR(25) NOT NULL,
     title VARCHAR(50) NOT NULL,
     CONSTRAINT fk_competitor_entrance_match FOREIGN KEY (match_id) REFERENCES match_table(match_id),

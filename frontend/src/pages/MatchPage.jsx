@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 
 /**
  * MatchPage component fetches and displays details of a specific match.
- * @returns {JSX.Element} The match detail UI
+ * @returns {JSX.Element} The match detail UI with competitors and committee members
  */
 const MatchPage = () => {
   const { matchId } = useParams();
@@ -58,6 +58,10 @@ const MatchPage = () => {
       </div>
     );
   }
+
+  // Filter competitors by team
+  const homeCompetitors = match.competitors ? match.competitors.filter(c => c.team_name === match.home_team_name) : [];
+  const awayCompetitors = match.competitors ? match.competitors.filter(c => c.team_name === match.away_team_name) : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-16 px-6">
@@ -155,7 +159,7 @@ const MatchPage = () => {
                   value: match.match_round,
                   icon: (
                     <svg className="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a，并且2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
                   ),
                 },
@@ -199,6 +203,57 @@ const MatchPage = () => {
               ))}
             </div>
           </div>
+
+          {/* Participants Section */}
+          {match.is_finished && (
+            <div className="mt-8 space-y-8">
+              <div className="bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-inner">
+                <h3 className="text-2xl font-bold text-indigo-800 mb-4">Home Team Competitors ({match.home_team_name})</h3>
+                <ul className="space-y-2">
+                  {homeCompetitors.map((competitor) => (
+                    <li key={competitor.com_id}>
+                      <Link
+                        to={`/teams/${encodeURIComponent(competitor.team_name)}/members/${encodeURIComponent(competitor.com_id)}`}
+                        className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                      >
+                        {competitor.first_name} {competitor.last_name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-inner">
+                <h3 className="text-2xl font-bold text-indigo-800 mb-4">Away Team Competitors ({match.away_team_name})</h3>
+                <ul className="space-y-2">
+                  {awayCompetitors.map((competitor) => (
+                    <li key={competitor.com_id}>
+                      <Link
+                        to={`/teams/${encodeURIComponent(competitor.team_name)}/members/${encodeURIComponent(competitor.com_id)}`}
+                        className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                      >
+                        {competitor.first_name} {competitor.last_name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-inner">
+                <h3 className="text-2xl font-bold text-indigo-800 mb-4">Committee Members</h3>
+                <ul className="space-y-2">
+                  {match.committeeMembers.map((member) => (
+                    <li key={member.com_mem_id}>
+                      <Link
+                        to={`/committee-members/${encodeURIComponent(member.com_mem_id)}`}
+                        className="text-indigo-600 hover:text-indigo-800 transition-colors"
+                      >
+                        {member.first_name} {member.last_name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
 
           {/* Back Link */}
           <div className="text-center animate-fade-in" style={{ animationDelay: '900ms' }}>

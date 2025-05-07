@@ -34,11 +34,6 @@ const getAllMatches = async (pool) => {
   }
 };
 
-
-/**
- * GET /api/matches
- * Retrieves all matches with team and stadium details.
- */
 router.get('/', async (req, res, next) => {
   try {
     const pool = req.app.get('db');
@@ -50,7 +45,7 @@ router.get('/', async (req, res, next) => {
 });
 
 const getMatchById = async (pool, matchId) => {
-  const query = `
+  const matchQuery = `
     SELECT 
       m.match_id,
       m.match_time,
@@ -76,15 +71,85 @@ const getMatchById = async (pool, matchId) => {
     JOIN stadium s ON m.stadium_id = s.stadium_id
     WHERE m.match_id = $1;
   `;
-  try {
-    const result = await pool.query(query, [matchId]);
 
-    if (result.rows.length === 0) {
+  try {
+    const matchResult = await pool.query(matchQuery, [matchId]);
+    if (matchResult.rows.length === 0) {
       const error = new Error('Match not found');
       error.status = 404;
       throw error;
     }
-    return result.rows[0];
+    const match = matchResult.rows[0];
+
+    if (match.is_finished) {
+      // Fetch competitors (assuming players)
+      const competitorsQuery = `
+        SELECT 
+          p.com_first_name AS first_name,
+          p.com_last_name AS last_name,
+          cep.com_id,
+          cep.title,
+          t.team_name
+        FROM competitor_entrance_permission cep
+        JOIN player p ON cep.com_id = p.com_id
+        JOIN team t ON p.team_id = t.team_id
+        WHERE cep.match_id = $1;
+      `;
+      const competitorsResult = await pool.query(competitorsQuery, [matchId]);
+      match.competitors = competitorsResult.rows;
+
+      // Fetch committee members using UNION across all committee member tables
+      const committeeQuery = `
+        SELECT 
+          mr.com_mem_id,
+          mr.com_mem_first_name AS first_name,
+          mr.com_mem_last_name AS last_name,
+          cme.title
+        FROM committee_member_entrance cme
+        JOIN main_referee mr ON cme.com_mem_id = mr.com_mem_id
+        WHERE cme.match_id = $1
+        UNION
+        SELECT 
+          mm.com_mem_id,
+          mm.com_mem_first_name AS first_name,
+          mm.com_mem_last_name AS last_name,
+          cme.title
+        FROM committee_member_entrance cme
+        JOIN match_manager mm ON cme.com_mem_id = mm.com_mem_id
+        WHERE cme.match_id = $1
+        UNION
+        SELECT 
+          var.com_mem_id,
+          var.com_mem_first_name AS first_name,
+          var.com_mem_last_name AS last_name,
+          cme.title
+        FROM committee_member_entrance cme
+        JOIN video_assistant_referee var ON cme.com_mem_id = var.com_mem_id
+        WHERE cme.match_id = $1
+        UNION
+        SELECT 
+          lr.com_mem_id,
+          lr.com_mem_first_name AS first_name,
+          lr.com_mem_last_name AS last_name,
+          cme.title
+        FROM committee_member_entrance cme
+        JOIN linesman_referee lr ON cme.com_mem_id = lr.com_mem_id
+        WHERE cme.match_id = $1
+        UNION
+        SELECT 
+          s.com_mem_id,
+          s.com_mem_first_name AS first_name,
+          s.com_mem_last_name AS last_name,
+          cme.title
+        FROM committee_member_entrance cme
+        JOIN sponsor s ON cme.com_mem_id = s.com_mem_id
+        WHERE cme.match_id = $1;
+      `;
+      const committeeResult = await pool.query(committeeQuery, [matchId]);
+      match.committeeMembers = committeeResult.rows;
+    }
+
+    return match;
   } catch (error) {
     throw error;
   }
