@@ -2,6 +2,7 @@ module.exports = async (pool) => {
   try {
     // authentication: users
     await pool.query(`
+      DROP TABLE IF EXISTS users CASCADE;
       CREATE TABLE IF NOT EXISTS users (
         league_id SERIAL PRIMARY KEY,
         id VARCHAR(30),
